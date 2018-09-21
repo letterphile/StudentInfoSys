@@ -1,0 +1,82 @@
+{%extends "adminhome.html"%}
+    <br>
+    <br>
+{%block body%}
+    <div class="container">
+        <h1 class="headingsub" id="Student">Student Registration</h1>
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="nameF">First Name</label>
+                    <input type="text" class="form-control" id="nameF" placeholder="Enter First Name">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="nameL">Last Name</label>
+                    <input type="text" class="form-control" id="nameL" placeholder="Enter Last Name">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="phoneU">Phone</label>
+                    <input type="number" class="form-control" id="number" placeholder="Enter Your Phone number">
+                </div>
+                <div class="form-group col-md-8">
+                    <label for="emailU">Email</label>
+                    <input type="email" class="form-control" id="emailU" placeholder="Enter your email here">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label for="Gender">Select Gender</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <label class="input-group-text" for="inputGroupSelect01">Gender</label>
+                        </div>
+                        <select class="custom-select" id="inputGroupSelect01">
+                            <option selected>Choose...</option>
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                            <option value="3">Trans</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="dob">Date of Birth</label>
+                    <input type="text" class="form-control" id="dob" placeholder="Enter Date of Birth">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="placeb">Place of Birth</label>
+                    <input type="text" class="form-control" id="placeB" placeholder="Enter Place of Birth">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputAddress">Address</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="House Number">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputAddress2">Address 2</label>
+                    <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputCity">City</label>
+                    <input type="text" class="form-control" id="inputCity" placeholder="Enter your city">
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="inputZip">Zip</label>
+                    <input type="text" class="form-control" id="inputZip" placeholder="Enter your Zip code">
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="pass" placeholder="Enter a strong Password">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Clear</button>
+        </form>
+    </div>
+{%endblock%}
