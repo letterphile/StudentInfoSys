@@ -1,25 +1,32 @@
-from django.shortcuts import render
-
+from django.shortcuts import render,redirect
+logged_in = False
 # Create your views here.
 def home(request):
     return render(request,'index.html')
 
 def admin(request):
+    global logged_in 
+    logged_in = False
     login_name = 'Administrator Login'
     context = {'login_name':login_name}
     if request.method == 'POST':
+        global logged_in
+        logged_in = False
         username = request.POST.get('username')
         password = request.POST.get('password')
         email = 'aswin4400@gmail.com'
         passw = 'password'
         if username == email and password == passw :
-            return render(request,'adminhome.html')
+            global logged_in
+            logged_in = True
+            return redirect('/admin_home')
     return render(request,'adminlogin.html',context) 
 
 def hod(request):
     login_name = 'HOD Login'
     context = {'login_name':login_name}
     return render(request,'hodlogin.html',context)
+
 def staff(request):
     login_name = 'Staff Login'
     context = {'login_name':login_name}
@@ -30,22 +37,41 @@ def student(request):
     return render(request,'studentlogin.html',context)
 
 def student_reg(request):
+    if logged_in == False:
+        return redirect('/admin')
     return render(request,'StudReg.html')
 
 def student_view(request):
+    if logged_in == False:
+        return redirect('/admin')
     return render(request,'StudView.html')
 
 def score(request):
+    if logged_in == False:
+        return redirect('/admin')
     return render(request,'Score.html')
 
 def faculty_reg(request):
+    if logged_in == False:
+        return redirect('/admin')
     return render(request,'FacReg.html')
 
 def subject_reg(request):
+    if logged_in == False:
+        return redirect('/admin')
     return render(request,'SubEntry.html')
 
 def subject_view(request):
+    if logged_in == False:
+        return redirect('/admin')
     return render(request,'SubView.html')
 
 def faculty_view(request):
+    if logged_in == False:
+        return redirect('/admin')
     return render(request,'FacView.html')
+
+def admin_home(request):
+    if logged_in == False:
+        return redirect('/admin')
+    return render(request,'adminhome.html')

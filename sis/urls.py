@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from django.contrib.auth.views import login
 app_name = 'sis'
 
 urlpatterns = [
@@ -15,4 +16,5 @@ urlpatterns = [
     path('faculty_view/',views.faculty_view,name='faculty_view'),
     path('subject_registration/',views.subject_reg,name='subject_reg'),
     path('view_subjects/',views.subject_view,name='subject_view'),
+    path('admin_home/',views.admin_home,name='admin_home'),
 ]
