@@ -1,0 +1,44 @@
+{%extends "FacReg.html"%}
+    {%block body%}
+    <div class="container">
+        <h1 class="headingsub" id="Student">Subject Registration</h1>
+        <form>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Faculty Name</label>
+                <div class="form-group col-md-10">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">Aravind</option>
+                        <option value="2">Aswin</option>
+                        <option value="3">Hashim</option>
+                        <option value="4">Arun</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Semester</label>
+                <div class="form-group col-md-10">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">S1</option>
+                        <option value="2">S2</option>
+                        <option value="3">S3</option>
+                        <option value="4">S4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="dob" class="col-sm-2 col-form-label">Subjects Name</label>
+                <div class="form-group col-md-10">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">English</option>
+                        <option value="2">Hindi</option>
+                        <option value="3">Malayalam</option>
+                        <option value="4">Maths</option>
+                    </select>
+                </div>
+            </div>
+        </form>
+    </div>
+{%endblock%}

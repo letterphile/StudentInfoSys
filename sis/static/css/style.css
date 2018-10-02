@@ -1,0 +1,15 @@
+.logo {
+    font-size: 28px;
+    font-family: 'Monoton', cursive;
+}
+.headingsub {
+    font-size: 75px;
+    font-family: 'Poiret One', cursive;
+}
+.heading {
+    font-size: 80px;
+    font-family: 'Monoton', cursive;
+}
+body{
+    background-image: url("/static/images/background.jpg");
+}

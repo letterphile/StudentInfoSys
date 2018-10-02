@@ -1,0 +1,43 @@
+{%extends "adminhome.html"%}
+<br>
+    <br>
+{%block body%}
+    <div class="container col-10">
+        <h1 class="headingsub" id="Student">Student List</h1>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Date of Birth</th>
+                    <th scope="col">Place of Birth</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Password</th>
+                    <th scope="col">Oparation</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Aravind</td>
+                    <td>Male</td>
+                    <td>07/10/1997</td>
+                    <td>Pothanicad</td>
+                    <td>Maleakudy House</td>
+                    <td>8281886068</td>
+                    <td>aravindjaimon1@gmail.com</td>
+                    <td>blahblahblah</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <button type="button" class="btn btn-secondary">Delete</button>
+                            <button type="button" class="btn btn-secondary">Edit</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+   </div>
+{%endblock%}

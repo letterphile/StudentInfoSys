@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{%load sis_tags%}
+{% block title %}Home{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+  {% user_auth user%}
+{% else %}
+{%user_not_auth user%}
+{% endif %}
+{% endblock %}
