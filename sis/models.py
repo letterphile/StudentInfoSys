@@ -11,3 +11,60 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+class Batch(models.Model):
+    year = models.PositiveIntegerField()
+    class Meta:
+        ordering = ('year',)
+    def __str__(self):
+        return str(self.year)
+class Branch(models.Model):
+    branch_name= models.CharField(max_length=25)
+    branch_code = models.CharField(max_length=3)
+    class Meta:
+        ordering =  ('branch_name',)
+    def __str__(self):
+        return self.branch_name
+
+class Semester(models.Model):
+    semester_name = models.CharField(max_length = 10)
+    semester_code = models.CharField(max_length = 2)
+    branch = models.ManyToManyField(Branch) 
+    class Meta:
+        ordering = ('semester_code',)
+    def __str__(self):
+        return self.semester_name
+        
+
+class Course(models.Model):
+    course_name = models.CharField(max_length= 45)
+    course_code = models.CharField(max_length=7)
+    semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
+    branch = models.ManyToManyField(Branch)
+    attendance = models.PositiveIntegerField(default=1)
+    class Meta:
+        ordering = ('id',)
+    def __str__(self):
+        return self.course_name
+
+class Student(models.Model):
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    branch = models.ForeignKey(Branch,on_delete=models.CASCADE)
+    semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
+    courses = models.ManyToManyField(Course)
+
+    class Meta:
+        ordering = ('id',)
+    def __str__(self):
+        return self.user
+
+class Exam(models.Model):
+    grades = (('O','O'),('A+','A+'),('A','A'),('B+','B+'),('C','C'),('D','D'),('P','P'))
+    semester = models.OneToOneField(Semester,on_delete=models.CASCADE)
+    course = models.OneToOneField(Course,on_delete=models.CASCADE)
+    student = models.OneToOneField(Student,on_delete=models.CASCADE)
+    grade  = models.CharField(max_length=2,choices=grades)
+
+    class Meta:
+        ordering = ('id',)
+    def __str__(self):
+        return self.course + self.student
