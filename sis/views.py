@@ -17,6 +17,9 @@ def view_subjects(request):
 
 @login_required(login_url='/accounts/login')
 def reg_student(request):
+    if request.method == 'POST':
+        for i in request.POST :
+            print(i)
     return render(request,'StudReg.html')
 
 @login_required(login_url='/accounts/login')
