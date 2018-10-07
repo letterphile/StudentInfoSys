@@ -1,0 +1,57 @@
+{%extends "FacReg.html"%}
+    {%block body%}
+    <div class="container">
+        <h1 class="headingsub" id="Student">Course Registration</h1>
+        <form action="register/">
+            <div class="form-group row">
+                <label for="Course" class="col-sm-2 col-form-label">Course</label>
+               <div class ="form-group col-md-10" >
+                <input type="text" class="form-control" id="inputZip" placeholder="Enter Course Name">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="Course" class="col-sm-2 col-form-label">Course Code</label>
+               <div class ="form-group col-md-10" >
+                <input type="text" class="form-control" id="inputCourseCode" placeholder="Enter Course Code">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Faculty Name</label>
+                <div class="form-group col-md-10">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">Aravind</option>
+                        <option value="2">Aswin</option>
+                        <option value="3">Hashim</option>
+                        <option value="4">Arun</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Semester</label>
+                <div class="form-group col-md-10">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">S1</option>
+                        <option value="2">S2</option>
+                        <option value="3">S3</option>
+                        <option value="4">S4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="dob" class="col-sm-2 col-form-label">Branch</label>
+                <div class="form-group col-md-10">
+                    <select class="custom-select" id="inputGroupSelect01">
+                        <option selected>Choose...</option>
+                        <option value="1">Computer Science</option>
+                        <option value="2">Electrical and Communication</option>
+                        <option value="3">Electrical and Electronics</option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Clear</button>
+        </form>
+    </div>
+{%endblock%}
