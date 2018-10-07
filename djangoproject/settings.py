@@ -25,7 +25,7 @@ SECRET_KEY = 'sb%(qb-w0f#ha6r7=9p5+f!ug6ox0bj_r+7t!3ys+@$@cq24zn'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost','shielded-atoll-59669.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
