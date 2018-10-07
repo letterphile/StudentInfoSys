@@ -28,7 +28,6 @@ class Branch(models.Model):
 class Semester(models.Model):
     semester_name = models.CharField(max_length = 10)
     semester_code = models.CharField(max_length = 2)
-    branch = models.ManyToManyField(Branch) 
     class Meta:
         ordering = ('semester_code',)
     def __str__(self):
