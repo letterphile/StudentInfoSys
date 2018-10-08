@@ -40,6 +40,7 @@ class Course(models.Model):
     semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
     branch = models.ManyToManyField(Branch)
     attendance = models.PositiveIntegerField(default=1)
+    faculty  = models.ForeignKey('Faculty',null=True,on_delete=models.SET_NULL)
     class Meta:
         ordering = ('id',)
     def __str__(self):
