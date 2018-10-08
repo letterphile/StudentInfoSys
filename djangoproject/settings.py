@@ -128,7 +128,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+    '/home/aswin/django-projec/env2/static',
 )
 AUTH_USER_MODEL = 'sis.CustomUser'
 LOGIN_REDIRECT_URL = '/'
