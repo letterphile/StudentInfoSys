@@ -18,7 +18,7 @@ class Batch(models.Model):
     def __str__(self):
         return str(self.year)
 class Branch(models.Model):
-    branch_name= models.CharField(max_length=25)
+    branch_name= models.CharField(max_length=50)
     branch_code = models.CharField(max_length=3)
     class Meta:
         ordering =  ('branch_name',)
