@@ -7,7 +7,7 @@ def show_home(request):
     return render(request,'home.html')
 @login_required(login_url='/accounts/login')
 def view_students(request):
-    students = CustomUser.objects.filter(usertype='STUDENT')
+    students = Student.objects.all()
     return render(request,'StudView.html',{'students':students})
 
 @login_required(login_url='/accounts/login')
