@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import *
+from django.db import IntegrityError
 # Create your views here.
 def show_home(request):
     return render(request,'home.html')
@@ -30,16 +31,21 @@ def reg_student(request):
         username+='{}{}0{}'.format(batch,branch.upper(),roll_num)
 
         s = CustomUser(first_name=first_name,last_name=last_name,username=username,usertype='STUDENT')
-        s.save()
-        s.set_password(password)
-        s.save()
-        batch = Batch.objects.get(year=int('20'+batch))
-        branch = Branch.objects.get(branch_code__startswith=branch)
-        sem  = Semester.objects.get(id=int(sem))
-        s = Student(user=s,branch=branch,semester=sem,batch=batch)
-        s.save()
+        try :
+            s.save()
+            s.set_password(password)
+            s.save()
+            batch = Batch.objects.get(year=int('20'+batch))
+            branch = Branch.objects.get(branch_code__startswith=branch)
+            sem  = Semester.objects.get(id=int(sem))
+            s = Student(user=s,branch=branch,semester=sem,batch=batch)
+            s.save()
+            return render(request,'regresult.html',{'flag':1,'student':s})
 
-    return render(request,'StudReg.html')
+        except IntegrityError:
+            return render(request,'regresult.html',{'flag':1})
+
+
 
 @login_required(login_url='/accounts/login')
 def score(request):
