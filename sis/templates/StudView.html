@@ -8,27 +8,26 @@
             <thead class="thead-dark">
                 <tr>
                     <th scope="col">No</th>
-                    <th scope="col">Student Name</th>
-                    <th scope="col">Roll Number</th>
+                    <th scope="col">First Name</th>
+                    <th scope="col">Last Name</th>
                     <th scope="col">Batch</th>
                     <th scope="col">Branch</th>
                     <th scope="col">Semester<th>
-                    <th scope="col">username</th>
-                    <th scope="col">Email</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Roll Number</th>
                 </tr>
             </thead>
             <tbody>
+                {%for student in students%}
                 <tr>
-                    <th scope="row">1</th>
-                    <td>Aravind</td>
-                    <td>Male</td>
-                    <td>07/10/1997</td>
-                    <td>Pothanicad</td>
-                    <td>Maleakudy House</td>
-                    <td>8281886068</td>
-                    <td>aravindjaimon1@gmail.com</td>
-                    <td>blahblahblah</td>
-                    <td>
+                    <th scope="row">{{student.id}}</th>
+                    <td>{{student.user.first_name}}</td>
+                    <td>{{student.user.last_name}}</td>
+                    <td>{{student.batch}}</td>
+                    <td>{{student.branch}}</td>
+                    <td>{{student.semester}}</td>
+                    <td>{{student.user.username}}</td>
+                    <td>{{student.rollnumber}}</td>
                         <div class="btn-group" role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-secondary">Delete</button>
                             <button type="button" class="btn btn-secondary">Edit</button>

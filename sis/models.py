@@ -51,7 +51,7 @@ class Course(models.Model):
 
 class Student(models.Model):
     gender_choices=(('M','Male'),('F','Female'))
-
+    rollnumber = models.PositiveIntegerField(null=True)
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch,on_delete=models.CASCADE)
     semester = models.ForeignKey(Semester,on_delete=models.CASCADE)

@@ -7,7 +7,8 @@ def show_home(request):
     return render(request,'home.html')
 @login_required(login_url='/accounts/login')
 def view_students(request):
-    return render(request,'StudView.html')
+    students = CustomUser.objects.filter(usertype='STUDENT')
+    return render(request,'StudView.html',{'students':students})
 
 @login_required(login_url='/accounts/login')
 def view_faculty(request):
@@ -30,7 +31,7 @@ def reg_student(request):
         username='PJR'
         username+='{}{}0{}'.format(batch,branch.upper(),roll_num)
 
-        s = CustomUser(first_name=first_name,last_name=last_name,username=username,usertype='STUDENT')
+        s = CustomUser(first_name=first_name,last_name=last_name,username=username,usertype='STUDENT',rollnumber=roll_num)
         try :
             s.save()
             s.set_password(password)
