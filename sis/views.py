@@ -52,4 +52,3 @@ def reg_subjects(request):
 @login_required(login_url='/accounts/login')
 def reg_faculty(request):
     return render(request,'FacReg.html')
-
