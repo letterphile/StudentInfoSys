@@ -6,9 +6,10 @@ class CustomUser(AbstractUser):
         ('STUDENT','Student'),
         ('TEACHER','Teacher'),
         ('ADMIN','Admin'),
-        ('HOD','HOD')
+        ('HOD','HOD'),
     )
     usertype = models.CharField(max_length=50,choices=choices)
+    user_slug = models.SlugField(max_length=25,null=True)
 
     def __str__(self):
         return self.username
