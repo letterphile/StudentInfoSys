@@ -31,7 +31,7 @@ def reg_student(request):
         username='PJR'
         username+='{}{}0{}'.format(batch,branch.upper(),roll_num)
 
-        s = CustomUser(first_name=first_name,last_name=last_name,username=username,usertype='STUDENT',rollnumber=roll_num)
+        s = CustomUser(first_name=first_name,last_name=last_name,username=username,usertype='STUDENT')
         try :
             s.save()
             s.set_password(password)
@@ -40,6 +40,7 @@ def reg_student(request):
             branch = Branch.objects.get(branch_code__startswith=branch)
             sem  = Semester.objects.get(id=int(sem))
             s = Student(user=s,branch=branch,semester=sem,batch=batch)
+            s.rollnumber = roll_num
             s.save()
             return render(request,'regresult.html',{'flag':True,'student':s})
 
