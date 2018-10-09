@@ -22,7 +22,7 @@ class Batch(models.Model):
 class Branch(models.Model):
     branch_name= models.CharField(max_length=50)
     branch_code = models.CharField(max_length=3)
-    hod = models.ForeignKey(CustomUser,on_delete = models.CASCADE)
+    hod = models.ForeignKey(CustomUser,on_delete = models.CASCADE,null=True)
     class Meta:
         ordering =  ('branch_name',)
     def __str__(self):
