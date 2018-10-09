@@ -36,7 +36,7 @@ def reg_student(request):
         batch = Batch.objects.get(year=int('20'+batch))
         branch = Branch.objects.get(branch_code__startswith=branch)
         sem  = Semester.objects.get(id=int(sem))
-        s = Student(user=s,branch=branch,semester=sem)
+        s = Student(user=s,branch=branch,semester=sem,batch=batch)
         s.save()
 
     return render(request,'StudReg.html')
