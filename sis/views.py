@@ -40,7 +40,7 @@ def reg_student(request):
             sem  = Semester.objects.get(id=int(sem))
             s = Student(user=s,branch=branch,semester=sem,batch=batch)
             s.save()
-            return render(request,'regresult.html',{'flag':True'student':s})
+            return render(request,'regresult.html',{'flag':True',student':s})
 
         except IntegrityError:
             return render(request,'regresult.html',{'flag':False})
