@@ -49,11 +49,20 @@ class Course(models.Model):
         return self.course_name
 
 class Student(models.Model):
+    gender_choices=(('M','Male'),('F','Female'))
+
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     branch = models.ForeignKey(Branch,on_delete=models.CASCADE)
     semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
     courses = models.ManyToManyField(Course)
     batch = models.ForeignKey(Batch,on_delete=models.CASCADE)
+    gender = models.CharField(max_length=10,choices=gender_choices,null=True)
+    dob = models.DateField(null=True)
+    pob  = models.CharField(max_length=50,null=True)
+    address1 = models.TextField(null=True)
+    address2 = models.TextField(null=True)
+    city = models.CharField(max_length=20,null=True)
+    pin = models.PositiveIntegerField(null=True)
 
     class Meta:
         ordering = ('id',)
@@ -76,6 +85,5 @@ class Faculty(models.Model):
     gender_choices = (('MALE','male'),('FEMALE','female'))
     user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
     phone = models.PositiveIntegerField()
-    email = models.CharField(max_length=20)
     gender = models.CharField(max_length=20)
     dob = models.DateField()
