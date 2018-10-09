@@ -11,10 +11,10 @@
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Batch</th>
-                    <th scope="col">Branch</th>
                     <th scope="col">Semester<th>
                     <th scope="col">Username</th>
                     <th scope="col">Roll Number</th>
+                    <th scope="col">Branch</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,10 +24,10 @@
                     <td>{{student.user.first_name}}</td>
                     <td>{{student.user.last_name}}</td>
                     <td>{{student.batch}}</td>
-                    <td>{{student.branch}}</td>
                     <td>{{student.semester}}</td>
                     <td>{{student.user.username}}</td>
                     <td>{{student.rollnumber}}</td>
+                    <td>{{student.branch}}</td>
                 </tr>
                 {%endfor%}
             </tbody>
