@@ -44,6 +44,8 @@ def reg_student(request):
 
         except IntegrityError:
             return render(request,'regresult.html',{'flag':1})
+    
+    return render(request,'StudReg.html')
 
 
 
