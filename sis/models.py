@@ -6,6 +6,7 @@ class CustomUser(AbstractUser):
         ('STUDENT','Student'),
         ('TEACHER','Teacher'),
         ('ADMIN','Admin'),
+        ('HOD','HOD')
     )
     usertype = models.CharField(max_length=50,choices=choices)
 
