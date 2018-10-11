@@ -3,6 +3,7 @@
 <p> First Name :{{user.first_name}}<br>
     Last Name : {{user.last_name}}<br>
     username : {{user.username}}<br>
+    <a href="{% url 'delete_user' user.username %}">DELETE</a>
 </p>
 
 {%endblock%}

@@ -69,3 +69,10 @@ def view_user(request,username):
     s = get_object_or_404(CustomUser,username=username)
     return render(request,'view_student.html',{'user':s})
 
+@login_required(login_url='/accounts/login')
+def del_user(request,username):
+    s= get_object_or_404(CustomUser,username=username)
+    user_name= s.username
+    s.delete()
+    return render(request,'del_user.html',{'user_name':user_name})
+
