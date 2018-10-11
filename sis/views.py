@@ -67,5 +67,5 @@ def reg_faculty(request):
 @login_required(login_url='/accounts/login')
 def view_user(request,username):
     s = get_object_or_404(CustomUser,username=username)
-    return render('view_student.html',{'user':s})
+    return render(request,'view_student.html',{'user':s})
 
