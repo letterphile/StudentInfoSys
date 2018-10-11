@@ -4,6 +4,7 @@
     Last Name : {{user.last_name}}<br>
     username : {{user.username}}<br>
     <a href="{% url 'delete_user' user.username %}">DELETE</a>
+    <a href="{% url 'edit_user' user.username %}">EDIT</a>
 </p>
 
 {%endblock%}

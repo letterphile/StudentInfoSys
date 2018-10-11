@@ -30,5 +30,6 @@ urlpatterns = [
     path('score/',score,name='score'),
     path('<slug:username>/',view_user,name='view_user'),
     path('delete/<slug:username>',del_user,name='delete_user'),
+    path('edit/<slug:username>',edit_user,name='edit_user'),
     
     ]

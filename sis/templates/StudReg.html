@@ -4,20 +4,24 @@
 {%block body%}
     <div class="container">
         <h1 class="headingsub" id="Student">Student Registration</h1>
-        <form action="." method="post" name="stureg">
+        {%if f_action%}
+        <form action="{%url 'reg_student' %}" method="post" name="stureg">
+        {%else%}
+        <form action="{%url 'edit_user' user_id %}" method="post" name="stureg">
+        {%endif%}
             {% csrf_token %}
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="nameF">First Name</label>
-                    <input type="text" class="form-control" id="nameF" placeholder="Enter First Name" name="first" required>
+                    <input type="text" class="form-control" id="nameF" placeholder="Enter First Name" name="first" value="{{first_name}}" required>
                 </div>
                 <div class="form-group col-md-4">
                     <label for="nameL">Last Name</label>
-                    <input type="text" class="form-control" id="nameL" placeholder="Enter Last Name" name="last" required>
+                    <input type="text" class="form-control" id="nameL" placeholder="Enter Last Name" name="last" value="{{last_name}}" required>
                 </div>
                 <div class="form-group col-md-4">
                         <label for="nameL">Roll Number</label>
-                        <input type="number" class="form-control" id="nameL" placeholder="Enter Roll Number" name="roll" required>
+                        <input type="number" class="form-control" id="nameL" placeholder="Enter Roll Number" name="roll" value="{{roll_num}}" required>
                 </div>
             </div>
             <div class="form-row">
@@ -61,10 +65,10 @@
                             <label class="input-group-text" for="inputGroupSelect01">Batch</label>
                         </div>
                         <select required class="custom-select" id="inputGroupSelect01" name="batch">
-                            <option value="">Choose</option>
-                            <option value="15">2015</option>
-                            <option value="16">2016</option>
-                            <option value="17">2017</option>
+                            <option value="{{batch}}">{{batch}}</option>
+                            {% for batch in batches%}
+                            <option value="{{batch}}">{{batch}}</option>
+                            {%endfor%}
                         </select>
                     </div>
                 </div>
@@ -75,10 +79,10 @@
                             <label class="input-group-text" for="inputGroupSelect01">Branch</label>
                         </div>
                         <select required class="custom-select" id="inputGroupSelect01" name="branch">
-                            <option value="">Choose</option>
-                            <option value="cs">Computer Science</option>
-                            <option value="ec">Electronics and Communication</option>
-                            <option value="ee">Electronics and Engineering</option>
+                            <option value="{{branch_code}}">{{branch}}</option>
+                            {% for branch in branches %}
+                            <option value="{{branch.branch_code}}">{{branch}}</option>
+                            {%endfor%}
                         </select>
                     </div>
                 </div>
@@ -89,10 +93,10 @@
                             <label class="input-group-text" for="inputGroupSelect01">Semester</label>
                         </div>
                         <select required class="custom-select" id="inputGroupSelect01" name="semester">
-                            <option value="">Choose...</option>
-                            <option value="1">S1</option>
-                            <option value="2">S2</option>
-                            <option value="3">S3</option>
+                            <option value="{{sem_id}}">{{sem}}</option>
+                            {% for semester in semesters %}
+                            <option value="{{semester.id}}">{{semester}}</option>
+                            {%endfor%}
                         </select>
                     </div>
                 </div>
@@ -119,11 +123,24 @@
                 </div>
                 <div class="form-group col-md-4">
                     <label for="password">Password</label>
-                    <input type="password" class="form-control" id="pass" placeholder="Enter a strong Password" name="password" required>
+                    {%if f_action%}
+                    <input type="password" class="form-control" id="pass" placeholder="Enter a strong Password" name="password" value="{{password}}" required>
+                    {%else%}
+                    <input type="password" class="form-control" id="pass" placeholder="Enter a strong Password" name="password" value="{{password}}">
+                    {%endif%}
                 </div>
             </div>
+            {%if f_action%}
             <button type="submit" class="btn btn-primary">Register</button>
             <button type="reset" class="btn btn-primary">Clear</button>
+            {%else%}
+            <button type="submit" class="btn btn-primary">Save</button>
+            {%endif%}            
         </form>
+        {%if not f_action%}
+        <form action="{%url 'view_user' user_id%}" method="get">
+            <button type="submit" class="btn btn-primary">View</button>
+        </form>
+        {%endif%}
     </div>
 {%endblock%}
