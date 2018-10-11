@@ -27,5 +27,7 @@ urlpatterns = [
     path('faculty_registration/',reg_faculty,name='ref_faculty'),
     path('view_subjects/',view_subjects,name='view_subjects'),
     path('subject_registration/',reg_subjects,name='reg_subjects'),
-    path('score/',score,name='score')
+    path('score/',score,name='score'),
+    path('<slug:username>/',view_user,name='view_user'),
+    
     ]

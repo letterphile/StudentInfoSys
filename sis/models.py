@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 
 class CustomUser(AbstractUser):
     choices = (
@@ -10,6 +11,8 @@ class CustomUser(AbstractUser):
     )
     usertype = models.CharField(max_length=50,choices=choices)
     user_slug = models.SlugField(max_length=25,null=True)
+    def get_absolute_url(self):
+        return reverse('view_user', kwargs={'username': self.username})
 
     def __str__(self):
         return self.username
@@ -64,6 +67,7 @@ class Student(models.Model):
     address2 = models.TextField(null=True)
     city = models.CharField(max_length=20,null=True)
     pin = models.PositiveIntegerField(null=True)
+
 
     class Meta:
         ordering = ('id',)

@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.db import IntegrityError
+from django.shortcuts import get_object_or_404
 # Create your views here.
 def show_home(request):
     return render(request,'home.html')
@@ -62,3 +63,9 @@ def reg_subjects(request):
 @login_required(login_url='/accounts/login')
 def reg_faculty(request):
     return render(request,'FacReg.html')
+
+@login_required(login_url='/accounts/login')
+def view_user(request,username):
+    s = get_object_or_404(CustomUser,username=username)
+    return render('view_student.html',{'user':s})
+
