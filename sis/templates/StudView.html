@@ -19,7 +19,7 @@
             </thead>
             <tbody>
                 {%for student in students%}
-                <tr><a href="{{student.user.get_absolute_url}}">
+                <tr>
                     <th scope="row">{{student.id}}</th>
                     <td>{{student.user.first_name}}
                     </td>
@@ -27,10 +27,9 @@
                     <td>{{student.user.last_name}}</td>
                     <td>{{student.batch}}</td>
                     <td>{{student.semester}}</td>
-                    <td>{{student.user.username}}</td>
+                    <td><a href="{{student.user.get_absolute_url}}">{{student.user.username}}</a></td>
                     <td>{{student.rollnumber}}</td>
                     <td>{{student.branch}}</td>
-                    </a>
                 </tr>
                 {%endfor%}
             </tbody>
