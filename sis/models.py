@@ -42,7 +42,7 @@ class Semester(models.Model):
 
 class Course(models.Model):
     course_name = models.CharField(max_length= 45)
-    course_code = models.CharField(max_length=7)
+    course_code = models.CharField(max_length=7,unique=True)
     semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
     branch = models.ManyToManyField(Branch)
     attendance = models.PositiveIntegerField(default=1)
