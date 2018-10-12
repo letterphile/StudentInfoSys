@@ -4,6 +4,11 @@
 {%block body%}
     <div class="container">
         <h1 class="headingsub" id="Student">Student Registration</h1>
+
+        {%if not f_action%}
+        <form action="{%url 'view_user' user_id%}" method="get" id="view">
+        </form>
+        {%endif%}
         {%if f_action%}
         <form action="{%url 'reg_student' %}" method="post" name="stureg">
         {%else%}
@@ -135,12 +140,8 @@
             <button type="reset" class="btn btn-primary">Clear</button>
             {%else%}
             <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary" form="view">View</button>
             {%endif%}            
         </form>
-        {%if not f_action%}
-        <form action="{%url 'view_user' user_id%}" method="get">
-            <button type="submit" class="btn btn-primary">View</button>
-        </form>
-        {%endif%}
     </div>
 {%endblock%}
