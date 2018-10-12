@@ -24,7 +24,7 @@ class Batch(models.Model):
         return str(self.year)
 class Branch(models.Model):
     branch_name= models.CharField(max_length=50)
-    branch_code = models.CharField(max_length=3)
+    branch_code = models.CharField(max_length=3,unique=True)
     hod = models.ForeignKey(CustomUser,on_delete = models.CASCADE,null=True)
     class Meta:
         ordering =  ('branch_name',)
@@ -33,7 +33,7 @@ class Branch(models.Model):
 
 class Semester(models.Model):
     semester_name = models.CharField(max_length = 10)
-    semester_code = models.CharField(max_length = 2)
+    semester_code = models.CharField(max_length = 2,unique=True)
     class Meta:
         ordering = ('semester_code',)
     def __str__(self):
