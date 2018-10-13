@@ -3,7 +3,7 @@
 <h2>Choose File to Process..</h2>
 <ol>
 {%for i in marklists%}
-<li><a href="{%url 'process_file' i.id%}">{{i.document.name}}</a></li>
+<li><a href="{%url 'process_file' i.id i.semester.id%}">{{i.document.name}}</a></li>
 {%endfor%}
 </ol>
 {%endblock%}
