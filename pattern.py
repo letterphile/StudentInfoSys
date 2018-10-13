@@ -31,7 +31,7 @@ def writetodb(match):
                 try:
                     c = Course.objects.get(course_code=k.group(1))
                 except ObjectDoesNotExist:
-                    c = Course.objects.create(course_code=k.group(1),course_name=k.group(1))
+                    c = Course.objects.create(course_code=k.group(1),course_name=k.group(1),semester=sem)
             
                 try:
                     e = Exam.objects.get(student=stud,semester=sem,course=c)
