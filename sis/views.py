@@ -39,7 +39,7 @@ def reg_student(request):
         branch = request.POST.get('branch')
         batch = request.POST.get('batch')
         username='PJR'
-        username+='{}{}0{}'.format(batch[2:],branch.upper()[:-1],str(roll_num).zfill(3))
+        username+='{}{}{}'.format(batch[2:],branch.upper()[:-1],str(roll_num).zfill(3))
 
         s = CustomUser(first_name=first_name,last_name=last_name,username=username,usertype='STUDENT')
         try :
