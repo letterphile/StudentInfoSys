@@ -33,7 +33,8 @@ def writetodb(match,semid):
             
                 try:
                     e = Exam.objects.get(student=stud,semester=sem,course=c)
-                    e.grade = k.group(2)
+                    if (k.group(2) != 'Absent'):
+                        e.grade = k.group(2)
                     e.save()
                     print("already exist so re writing...")
                 except ObjectDoesNotExist:
