@@ -5,6 +5,7 @@
     username : {{user.username}}<br>
     <a href="{% url 'delete_user' user.username %}">DELETE</a>
     <a href="{% url 'edit_user' user.username %}">EDIT</a>
+    <a href="{% url 'view_result' user.username%}">RESULT</a>
 </p>
 
 {%endblock%}
