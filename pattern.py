@@ -28,7 +28,11 @@ def writetodb(match):
         for j in i[1]:
             s = new_pattern.finditer(j)
             for k in s:
-                c = Course.objects.get(course_code=k.group(1))
+                try:
+                    c = Course.objects.get(course_code=k.group(1))
+                except ObjectDoesNotExist:
+                    c = Course.objects.create(course_code=k.group(1),course_name=k.group(1))
+            
                 try:
                     e = Exam.objects.get(student=stud,semester=sem,course=c)
                     e.grade = k.group(2)
