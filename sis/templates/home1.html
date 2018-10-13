@@ -47,13 +47,10 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/score">Score</a>
+                    <a class="nav-link" href="{%url 'form_upload'%}">Upload</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Toppers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Users</a>
+                    <a class="nav-link" href="{%url 'process'%}">Update Grades</a>
                 </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" action="{%url 'logout' %}" method="get">
