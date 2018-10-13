@@ -193,13 +193,13 @@ def process(request):
     return render(request,'process.html',{'marklists':marklists})
 
 @login_required(login_url='/accounts/login')
-def process_file(request,id):
+def process_file(request,id,semid):
     marklist = MarkList.objects.get(id=id)
     file_path = os.path.join(settings.BASE_DIR,'media/{}'.format(marklist.document.name))
     print(file_path)
     matches=ptot(file_path)
     print(matches)
-    writetodb(matches) 
+    writetodb(matches,semid) 
     return redirect('process')
 
     

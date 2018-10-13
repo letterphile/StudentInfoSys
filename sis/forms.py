@@ -6,4 +6,4 @@ from .models import *
 class MarkListForm(forms.ModelForm):
     class Meta:
         model = MarkList
-        fields = ('description', 'document', )
+        fields = ('semester','description', 'document', )

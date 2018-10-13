@@ -1,7 +1,7 @@
 from pdftotext import *
 from sis.models import *
 from django.core.exceptions import ObjectDoesNotExist
-def writetodb(match):
+def writetodb(match,semid):
     a = []
     b = []
     matches = match
@@ -13,17 +13,15 @@ def writetodb(match):
 	    j[2] = j[2][1:]
 	    j[2].append(j[1])
 	    del j[1]
-    sem = Semester.objects.get(semester_code='s3')
+    sem = Semester.objects.get(id=int(semid))
     new_pattern = r'(\w+)\((\w+[+]?)\)'
     new_pattern = re.compile(new_pattern)
     for i in a:
 	    #print(i[0])
         try:
-            print(i[0])
             cuser = CustomUser.objects.get(username=i[0])
             stud = Student.objects.get(user=cuser)
         except ObjectDoesNotExist:
-            print("failed")
             continue
         for j in i[1]:
             s = new_pattern.finditer(j)
