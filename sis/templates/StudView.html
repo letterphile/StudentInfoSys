@@ -1,38 +1,36 @@
 {%extends "home1.html"%}
 <br>
-    <br>
+<br>
 {%block body%}
-    <div class="container col-10">
-        <h1 class="headingsub" id="Student">Student List</h1>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">No</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Batch</th>
-                    <th scope="col">Semester<th>
-                    <th scope="col">Username</th>
-                    <th scope="col">Roll Number</th>
-                    <th scope="col">Branch</th>
-                </tr>
-            </thead>
-            <tbody>
-                {%for student in students%}
-                <tr>
-                    <th scope="row">{{student.id}}</th>
-                    <td>{{student.user.first_name}}
-                    </td>
-                    
-                    <td>{{student.user.last_name}}</td>
-                    <td>{{student.batch}}</td>
-                    <td>{{student.semester}}</td>
-                    <td><a href="{{student.user.get_absolute_url}}">{{student.user.username}}</a></td>
-                    <td>{{student.rollnumber}}</td>
-                    <td>{{student.branch}}</td>
-                </tr>
-                {%endfor%}
-            </tbody>
-        </table>
-   </div>
+<div class="container col-10">
+    <h1 class="headingsub" id="Student">Student List</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">Batch</th>
+                <th scope="col">Semester</th>
+                <th scope="col">Username</th>
+                <th scope="col">Roll Number</th>
+                <th scope="col">Branch</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for student in students%}
+            <tr>
+                <th scope="row">{{student.id}}</th>
+                <td>{{student.user.first_name}}</td>
+                <td>{{student.user.last_name}}</td>
+                <td>{{student.batch}}7</td>
+                <td>{{student.semester}}</td>
+                <td><a href="{{student.user.get_absolute_url}}">{{student.user.username}}</a></td>
+                <td>{{student.rollnumber}}</td>
+                <td>{{student.branch}}</td>
+            </tr>
+            {%endfor%}
+        </tbody>
+    </table>
+</div>
 {%endblock%}

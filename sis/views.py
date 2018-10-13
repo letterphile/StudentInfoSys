@@ -211,7 +211,7 @@ def view_result(request,username):
     if results.filter(semester=Semester.objects.get(semester_code='s8')).count() is not 0:
         s8 = results.filter(semester=Semester.objects.get(semester_code='s8'))
 
-    return render (request,'view_result.html',{'s1':s1,'s2':s2,'s3':s3,'s4':s4,'s5':s5,'s6':s6,'s7':s7,'s8':s8})
+    return render (request,'view_result.html',{'s1':s1,'s2':s2,'s3':s3,'s4':s4,'s5':s5,'s6':s6,'s7':s7,'s8':s8,'flag':flag})
 
 @login_required(login_url='/accounts/login')
 def form_upload(request):
@@ -249,6 +249,7 @@ def process_file(request,id,semid):
     print(matches)
     writetodb(matches,semid) 
     return redirect('process')
+
 @login_required(login_url='/accounts/login')
 def not_auth(request):
     return render(request,'no_auth.html')
