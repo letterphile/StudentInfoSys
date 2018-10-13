@@ -106,7 +106,13 @@ def view_user(request,username):
     if  request.user.usertype != 'ADMIN' and request.user.username != username:
         return render(request,'no_auth.html')
     s = get_object_or_404(CustomUser,username=username)
-    return render(request,'view_student.html',{'user':s})
+    req_user = request.user
+    flag=False 
+    if req_user.usertype == 'ADMIN':
+        flag = True 
+    print(flag)
+    print(req_user.usertype)
+    return render(request,'view_student.html',{'user':s,'flag':flag})
 
 @login_required(login_url='/accounts/login')
 def del_user(request,username):
@@ -171,6 +177,10 @@ def view_result(request,username):
     if request.user.username != username and request.user.usertype != 'ADMIN':
        return render(request,'no_auth.html')
     cuser = get_object_or_404(CustomUser,username=username)
+    flag = False
+    req_user = request.user
+    if req_user.usertype == 'ADMIN':
+        flag = True
     stud = Student.objects.get(user=cuser)
     results = Exam.objects.filter(student=stud)
     s1=None
