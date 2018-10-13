@@ -10,22 +10,37 @@ import os
 from django.conf import settings
 # Create your views here.
 def show_home(request):
+    if  not request.user.is_anonymous:
+        if request.user.usertype == 'STUDENT':
+            return redirect('view_user',username=request.user.username)
     return render(request,'home.html')
 @login_required(login_url='/accounts/login')
 def view_students(request):
+    if request.user.usertype != 'ADMIN':
+        return render(request,'no_auth.html')
+
     students = Student.objects.all()
     return render(request,'StudView.html',{'students':students})
 
 @login_required(login_url='/accounts/login')
 def view_faculty(request):
+    if request.user.usertype != 'ADMIN':
+        return render(request,'no_auth.html')
     return render(request,'FacView.html')
 
 @login_required(login_url='/accounts/login')
 def view_subjects(request):
+    if request.user.usertype != 'ADMIN':
+        return render(request,'no_auth.html')
+
     return render(request,'SubView.html')
 
 @login_required(login_url='/accounts/login')
 def reg_student(request):
+
+    if request.user.usertype != 'ADMIN':
+        return render(request,'no_auth.html')
+
     f_action=1
     semesters = Semester.objects.all()
     batches = Batch.objects.all()
@@ -74,19 +89,30 @@ def score(request):
 
 @login_required(login_url='/accounts/login')
 def reg_subjects(request):
+    if request.user.usertype != 'ADMIN':
+        return render(request,'no_auth.html')
+
     return render(request,'SubEntry.html')
 
 @login_required(login_url='/accounts/login')
 def reg_faculty(request):
+    if request.user.usertype != 'ADMIN':
+       return render(request,'no_auth.html')
+
     return render(request,'FacReg.html')
 
 @login_required(login_url='/accounts/login')
 def view_user(request,username):
+    if  request.user.usertype != 'ADMIN' and request.user.username != username:
+        return render(request,'no_auth.html')
     s = get_object_or_404(CustomUser,username=username)
     return render(request,'view_student.html',{'user':s})
 
 @login_required(login_url='/accounts/login')
 def del_user(request,username):
+    if request.user.usertype != 'ADMIN':
+       return render(request,'no_auth.html')
+ 
     s= get_object_or_404(CustomUser,username=username)
     user_name= s.username
     s.delete()
@@ -94,6 +120,9 @@ def del_user(request,username):
 
 @login_required(login_url='/accounts/login')
 def edit_user(request,username):
+
+    if request.user.usertype != 'ADMIN':
+        return render(request,'no_auth.html')
     semesters = Semester.objects.all()
     batches = Batch.objects.all()
     branches = Branch.objects.all()
@@ -139,6 +168,8 @@ def edit_user(request,username):
 
 @login_required(login_url='/accounts/login')
 def view_result(request,username):
+    if request.user.username != username and request.user.usertype != 'ADMIN':
+       return render(request,'no_auth.html')
     cuser = get_object_or_404(CustomUser,username=username)
     stud = Student.objects.get(user=cuser)
     results = Exam.objects.filter(student=stud)
@@ -174,6 +205,8 @@ def view_result(request,username):
 
 @login_required(login_url='/accounts/login')
 def form_upload(request):
+    if request.user.usertype != 'ADMIN':
+       return render(request,'no_auth.html')
     marklists = MarkList.objects.all()
     print(marklists)
     if request.method == 'POST':
@@ -189,11 +222,16 @@ def form_upload(request):
 
 @login_required(login_url='/accounts/login')
 def process(request):
+    if request.user.usertype != 'ADMIN':
+        return render(request,'no_auth.html')
     marklists = MarkList.objects.all()
     return render(request,'process.html',{'marklists':marklists})
 
 @login_required(login_url='/accounts/login')
 def process_file(request,id,semid):
+    if request.user.usertype != 'ADMIN':
+        return render(request,'no_auth.html')
+
     marklist = MarkList.objects.get(id=id)
     file_path = os.path.join(settings.BASE_DIR,'media/{}'.format(marklist.document.name))
     print(file_path)
@@ -202,4 +240,5 @@ def process_file(request,id,semid):
     writetodb(matches,semid) 
     return redirect('process')
 
-    
+def not_auth(request):
+    return render(request,'no_auth.html')

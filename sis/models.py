@@ -15,7 +15,7 @@ class CustomUser(AbstractUser):
         ('ADMIN','Admin'),
         ('HOD','HOD'),
     )
-    usertype = models.CharField(max_length=50,choices=choices)
+    usertype = models.CharField(max_length=50,choices=choices,default='STUDENT')
     user_slug = models.SlugField(max_length=25,null=True)
     def get_absolute_url(self):
         return reverse('view_user', kwargs={'username': self.username})

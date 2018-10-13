@@ -38,5 +38,6 @@ urlpatterns = [
     path('delete/<slug:username>',del_user,name='delete_user'),
     path('edit/<slug:username>',edit_user,name='edit_user'),
     path('<slug:username>/result/',view_result,name='view_result'), 
+    path('not_authorized/',not_auth,name='no_auth'),
     ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
