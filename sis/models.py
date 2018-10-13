@@ -1,6 +1,12 @@
+from __future__ import unicode_literals
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+
+class Document(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
 
 class CustomUser(AbstractUser):
     choices = (
@@ -41,7 +47,7 @@ class Semester(models.Model):
         
 
 class Course(models.Model):
-    course_name = models.CharField(max_length= 45)
+    course_name = models.CharField(max_length= 80)
     course_code = models.CharField(max_length=7,unique=True)
     semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
     branch = models.ManyToManyField(Branch)
@@ -75,11 +81,11 @@ class Student(models.Model):
         return str(self.user)
 
 class Exam(models.Model):
-    grades = (('O','O'),('A+','A+'),('A','A'),('B+','B+'),('C','C'),('D','D'),('P','P'))
+    grades = (('O','O'),('A+','A+'),('A','A'),('B+','B+'),('C','C'),('D','D'),('P','P'),('Absent','Absent'))
     semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
-    grade  = models.CharField(max_length=2,choices=grades)
+    grade  = models.CharField(max_length=10,choices=grades)
 
     class Meta:
         ordering = ('id',)
@@ -92,3 +98,8 @@ class Faculty(models.Model):
     phone = models.PositiveIntegerField()
     gender = models.CharField(max_length=20)
     dob = models.DateField()
+
+class MarkList(models.Model):
+    description = models.CharField(max_length=255, blank=True)
+    document = models.FileField(upload_to='documents/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)

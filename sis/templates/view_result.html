@@ -1,0 +1,81 @@
+{%extends 'home1.html'%}
+{%block body%}
+{%if s1 is not None%}
+<h2>Semester - 1</h2>
+{%for i in s1%}
+<br>
+{{i.course }}: {{i.grade}}
+
+{%endfor%}
+{%endif%}
+{%if s2 is not None%}
+<h2>Semester - 2</h2>
+{%for i in s2%}
+<br>
+{{i.course }}: {{i.grade}}
+
+{%endfor%}
+{%endif%}
+{%if s3 is not None%}
+<h2>Semester - 3</h2>
+{%for i in s3%}
+<br>
+{{i.course }}: {{i.grade}}
+
+{%endfor%}
+{%endif%}
+{%if s4 is not None%}
+<h2>Semester - 4</h2>
+{%for i in s4%}
+<br>
+{{i.course }}: {{i.grade}}
+
+{%endfor%}
+{%endif%}
+{%if s4 is not None%}
+<h2>Semester - 4</h2>
+{%for i in s4%}
+<br>
+{{i.course }}: {{i.grade}}
+
+{%endfor%}
+{%endif%}
+{%if s5 is not None%}
+<h2>Semester - 5</h2>
+{%for i in s5%}
+<br>
+{{i.course }}: {{i.grade}}
+
+{%endfor%}
+{%endif%}
+
+{%if s6 is not None%}
+<h2>Semester - 6</h2>
+{%for i in s6%}
+<br>
+{{i.course }}: {{i.grade}}
+{%endfor%}
+{%endif%}
+
+
+{%if s7 is not None%}
+<h2>Semester - 7</h2>
+{%for i in s7%}
+<br>
+{{i.course }}: {{i.grade}}
+
+{%endfor%}
+{%endif%}
+
+{%if s8 is not None%}
+<h2>Semester - 8</h2>
+{%for i in s8%}
+<br>
+{{i.course}}: {{i.grade}}
+
+{%endfor%}
+{%endif%}
+
+
+
+{%endblock%}

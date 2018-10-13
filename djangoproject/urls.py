@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path,include
 from django.views.generic.base import TemplateView
 from sis.views import * 
+from django.conf.urls.static import static
+from django.conf import settings
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',show_home, name='home'),
@@ -28,8 +31,12 @@ urlpatterns = [
     path('view_subjects/',view_subjects,name='view_subjects'),
     path('subject_registration/',reg_subjects,name='reg_subjects'),
     path('score/',score,name='score'),
+    path('upload/',form_upload,name='form_upload'),
+    path('process/',process,name='process'),
+    path('process/<int:id>',process_file,name='process_file'),
     path('<slug:username>/',view_user,name='view_user'),
     path('delete/<slug:username>',del_user,name='delete_user'),
     path('edit/<slug:username>',edit_user,name='edit_user'),
-    
+    path('<slug:username>/result/',view_result,name='view_result'), 
     ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

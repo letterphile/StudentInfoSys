@@ -133,5 +133,8 @@ STATICFILES_DIRS = (
 AUTH_USER_MODEL = 'sis.CustomUser'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 # This is used to setup postgres in heroku
 DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)

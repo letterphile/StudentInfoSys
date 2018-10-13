@@ -1,0 +1,16 @@
+{% extends 'home1.html' %}
+
+{% block body%}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Upload</button>
+  </form>
+<ol>
+{%for marklist in marklists%}
+<li><a href="{{marklist.document.url}}">{{marklist.document.name}}</a></li>
+{%endfor%}
+</ol>
+  <p><a href="{% url 'home' %}">Return to home</a></p>
+
+{% endblock %}

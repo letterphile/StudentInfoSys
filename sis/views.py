@@ -1,8 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth.decorators import login_required
 from .models import *
 from django.db import IntegrityError
 from django.shortcuts import get_object_or_404
+from .forms import *
+from pdftotext import *
+from pattern import *
+import os
+from django.conf import settings
 # Create your views here.
 def show_home(request):
     return render(request,'home.html')
@@ -132,3 +137,69 @@ def edit_user(request,username):
     'password':password,'sem':sem,'sem_id':sem_id,'branch_code':branch_code,'branch':branch,'batch':str(batch),'user_id':userid,'f_action':f_action,
     'branches':branches,'semesters':semesters,'batches':batches})
 
+@login_required(login_url='/accounts/login')
+def view_result(request,username):
+    cuser = get_object_or_404(CustomUser,username=username)
+    stud = Student.objects.get(user=cuser)
+    results = Exam.objects.filter(student=stud)
+    s1=None
+    s2=None
+    s3=None
+    s4=None
+    s5=None
+    s6=None
+    s7=None
+    s8=None
+
+    if results.filter(semester=Semester.objects.get(semester_code=3)).count() is not 0:
+        s3 = results.filter(semester=Semester.objects.get(semester_code=3))
+    if results.filter(semester=Semester.objects.get(semester_code=1)).count() is not 0:
+        s1 = results.filter(semester=Semester.objects.get(semester_code=1))
+    if results.filter(semester=Semester.objects.get(semester_code=2)).count() is not 0:
+        s2 = results.filter(semester=Semester.objects.get(semester_code=2))
+    if results.filter(semester=Semester.objects.get(semester_code=4)).count() is not 0:
+        s4 = results.filter(semester=Semester.objects.get(semester_code=4))
+    if results.filter(semester=Semester.objects.get(semester_code=5)).count() is not 0:
+        s5 = results.filter(semester=Semester.objects.get(semester_code=5))
+
+    if results.filter(semester=Semester.objects.get(semester_code=6)).count() is not 0:
+        s6 = results.filter(semester=Semester.objects.get(semester_code=6))
+
+    if results.filter(semester=Semester.objects.get(semester_code=7)).count() is not 0:
+        s7 = results.filter(semester=Semester.objects.get(semester_code=7))
+    if results.filter(semester=Semester.objects.get(semester_code=8)).count() is not 0:
+        s8 = results.filter(semester=Semester.objects.get(semester_code=8))
+
+    return render (request,'view_result.html',{'s1':s1,'s2':s2,'s3':s3,'s4':s4,'s5':s5,'s6':s6,'s7':s7,'s8':s8})
+
+@login_required(login_url='/accounts/login')
+def form_upload(request):
+    marklists = MarkList.objects.all()
+    print(marklists)
+    if request.method == 'POST':
+        form = MarkListForm(request.POST, request.FILES)
+        if form.is_valid():
+            print("valid")
+            form.save()
+    else:
+        form = MarkListForm()
+    return render(request, 'form_upload.html', {
+        'form': form,'marklists':marklists
+    })
+
+@login_required(login_url='/accounts/login')
+def process(request):
+    marklists = MarkList.objects.all()
+    return render(request,'process.html',{'marklists':marklists})
+
+@login_required(login_url='/accounts/login')
+def process_file(request,id):
+    marklist = MarkList.objects.get(id=id)
+    file_path = os.path.join(settings.BASE_DIR,'media/{}'.format(marklist.document.name))
+    print(file_path)
+    matches=ptot(file_path)
+    print(matches)
+    writetodb(matches) 
+    return redirect('process')
+
+    
