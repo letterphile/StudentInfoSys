@@ -151,7 +151,7 @@ def view_result(request,username):
     s7=None
     s8=None
 
-    if results.filter(semester=Semester.objects.get(semester_code=3)).count() is not 0:
+    if results.filter(semester=Semester.objects.get(semester_code='s3')).count() is not 0:
         s3 = results.filter(semester=Semester.objects.get(semester_code='s3'))
     if results.filter(semester=Semester.objects.get(semester_code='s1')).count() is not 0:
         s1 = results.filter(semester=Semester.objects.get(semester_code='s1'))
