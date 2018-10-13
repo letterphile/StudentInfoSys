@@ -249,6 +249,6 @@ def process_file(request,id,semid):
     print(matches)
     writetodb(matches,semid) 
     return redirect('process')
-
+@login_required(login_url='/accounts/login')
 def not_auth(request):
     return render(request,'no_auth.html')
