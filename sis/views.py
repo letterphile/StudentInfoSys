@@ -152,23 +152,23 @@ def view_result(request,username):
     s8=None
 
     if results.filter(semester=Semester.objects.get(semester_code=3)).count() is not 0:
-        s3 = results.filter(semester=Semester.objects.get(semester_code=3))
-    if results.filter(semester=Semester.objects.get(semester_code=1)).count() is not 0:
-        s1 = results.filter(semester=Semester.objects.get(semester_code=1))
-    if results.filter(semester=Semester.objects.get(semester_code=2)).count() is not 0:
-        s2 = results.filter(semester=Semester.objects.get(semester_code=2))
-    if results.filter(semester=Semester.objects.get(semester_code=4)).count() is not 0:
-        s4 = results.filter(semester=Semester.objects.get(semester_code=4))
-    if results.filter(semester=Semester.objects.get(semester_code=5)).count() is not 0:
-        s5 = results.filter(semester=Semester.objects.get(semester_code=5))
+        s3 = results.filter(semester=Semester.objects.get(semester_code='s3'))
+    if results.filter(semester=Semester.objects.get(semester_code='s1')).count() is not 0:
+        s1 = results.filter(semester=Semester.objects.get(semester_code='s1'))
+    if results.filter(semester=Semester.objects.get(semester_code='s2')).count() is not 0:
+        s2 = results.filter(semester=Semester.objects.get(semester_code='s2'))
+    if results.filter(semester=Semester.objects.get(semester_code='s4')).count() is not 0:
+        s4 = results.filter(semester=Semester.objects.get(semester_code='s4'))
+    if results.filter(semester=Semester.objects.get(semester_code='s5')).count() is not 0:
+        s5 = results.filter(semester=Semester.objects.get(semester_code='s5'))
 
-    if results.filter(semester=Semester.objects.get(semester_code=6)).count() is not 0:
-        s6 = results.filter(semester=Semester.objects.get(semester_code=6))
+    if results.filter(semester=Semester.objects.get(semester_code='s6')).count() is not 0:
+        s6 = results.filter(semester=Semester.objects.get(semester_code='s6'))
 
-    if results.filter(semester=Semester.objects.get(semester_code=7)).count() is not 0:
-        s7 = results.filter(semester=Semester.objects.get(semester_code=7))
-    if results.filter(semester=Semester.objects.get(semester_code=8)).count() is not 0:
-        s8 = results.filter(semester=Semester.objects.get(semester_code=8))
+    if results.filter(semester=Semester.objects.get(semester_code='s7')).count() is not 0:
+        s7 = results.filter(semester=Semester.objects.get(semester_code='s7'))
+    if results.filter(semester=Semester.objects.get(semester_code='s8')).count() is not 0:
+        s8 = results.filter(semester=Semester.objects.get(semester_code='s8'))
 
     return render (request,'view_result.html',{'s1':s1,'s2':s2,'s3':s3,'s4':s4,'s5':s5,'s6':s6,'s7':s7,'s8':s8})
 
