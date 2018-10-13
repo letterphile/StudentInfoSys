@@ -13,7 +13,7 @@ def writetodb(match):
 	    j[2] = j[2][1:]
 	    j[2].append(j[1])
 	    del j[1]
-    sem = Semester.objects.get(semester_code=3)
+    sem = Semester.objects.get(semester_code='s3')
     new_pattern = r'(\w+)\((\w+[+]?)\)'
     new_pattern = re.compile(new_pattern)
     for i in a:
