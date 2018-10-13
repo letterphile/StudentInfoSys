@@ -100,7 +100,7 @@ class Faculty(models.Model):
     dob = models.DateField()
 
 class MarkList(models.Model):
-    semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
+    semester = models.ForeignKey(Semester,on_delete=models.CASCADE,null=True,blank=True)
     description = models.CharField(max_length=255, blank=True)
     document = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
