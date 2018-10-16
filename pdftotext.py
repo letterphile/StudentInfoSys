@@ -1,7 +1,6 @@
 import PyPDF2 
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
-import textract
 import re
 def ptot(file):
     filename =  file
