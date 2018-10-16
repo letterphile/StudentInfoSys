@@ -19,6 +19,9 @@ def show_home(request):
     return render(request,'home.html')
 @login_required(login_url='/accounts/login')
 def view_students(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.usertype != 'ADMIN':
         return render(request,'no_auth.html')
 
@@ -27,12 +30,18 @@ def view_students(request):
 
 @login_required(login_url='/accounts/login')
 def view_faculty(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.usertype != 'ADMIN':
         return render(request,'no_auth.html')
     return render(request,'FacView.html')
 
 @login_required(login_url='/accounts/login')
 def view_subjects(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.usertype != 'ADMIN':
         return render(request,'no_auth.html')
 
@@ -40,6 +49,8 @@ def view_subjects(request):
 
 @login_required(login_url='/accounts/login')
 def reg_student(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
 
     if request.user.usertype != 'ADMIN':
         return render(request,'no_auth.html')
@@ -70,6 +81,8 @@ def reg_student(request):
             s = Student(user=s,branch=branch,semester=sem,batch=batch)
             s.rollnumber = roll_num
             s.save()
+            log = Logs(user=request.user,activity="data inserted",place="<Student> Table")
+            log.save()
             return render(request,'regresult.html',{'flag':True,'student':s,'f_action':f_action})
 
         except IntegrityError:
@@ -92,6 +105,9 @@ def score(request):
 
 @login_required(login_url='/accounts/login')
 def reg_subjects(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.usertype != 'ADMIN':
         return render(request,'no_auth.html')
 
@@ -99,6 +115,8 @@ def reg_subjects(request):
 
 @login_required(login_url='/accounts/login')
 def reg_faculty(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
     if request.user.usertype != 'ADMIN':
        return render(request,'no_auth.html')
 
@@ -106,6 +124,8 @@ def reg_faculty(request):
 
 @login_required(login_url='/accounts/login')
 def view_user(request,username):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
     if  request.user.usertype != 'ADMIN' and request.user.username != username:
         return render(request,'no_auth.html')
     s = get_object_or_404(CustomUser,username=username)
@@ -119,6 +139,9 @@ def view_user(request,username):
 
 @login_required(login_url='/accounts/login')
 def del_user(request,username):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.usertype != 'ADMIN':
        return render(request,'no_auth.html')
  
@@ -129,6 +152,8 @@ def del_user(request,username):
 
 @login_required(login_url='/accounts/login')
 def edit_user(request,username):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
 
     if request.user.usertype != 'ADMIN':
         return render(request,'no_auth.html')
@@ -177,6 +202,9 @@ def edit_user(request,username):
 
 @login_required(login_url='/accounts/login')
 def view_result(request,username):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.username != username and request.user.usertype != 'ADMIN':
        return render(request,'no_auth.html')
     cuser = get_object_or_404(CustomUser,username=username)
@@ -278,6 +306,9 @@ def view_result(request,username):
 
 @login_required(login_url='/accounts/login')
 def form_upload(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.usertype != 'ADMIN':
        return render(request,'no_auth.html')
     marklists = MarkList.objects.all()
@@ -295,6 +326,9 @@ def form_upload(request):
 
 @login_required(login_url='/accounts/login')
 def process(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.usertype != 'ADMIN':
         return render(request,'no_auth.html')
     marklists = MarkList.objects.all()
@@ -302,6 +336,9 @@ def process(request):
 
 @login_required(login_url='/accounts/login')
 def process_file(request,id,semid):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.usertype != 'ADMIN':
         return render(request,'no_auth.html')
 
@@ -315,10 +352,16 @@ def process_file(request,id,semid):
 
 @login_required(login_url='/accounts/login')
 def not_auth(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     return render(request,'no_auth.html')
 
 @login_required(login_url='/accounts/login')
 def search(request):
+    log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
+    log.save()
+
     if request.user.usertype != 'ADMIN':
        return render(request,'no_auth.html')
     query=""
