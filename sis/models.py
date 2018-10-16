@@ -104,3 +104,10 @@ class MarkList(models.Model):
     description = models.CharField(max_length=255, blank=True)
     document = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+
+class Logs(models.Model):
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    activity = models.CharField(max_length=25)
+    place = models.CharField(max_length=100)
+    time = models.DateTimeField(auto_now_add=True)
