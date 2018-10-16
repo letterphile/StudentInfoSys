@@ -81,7 +81,7 @@ def reg_student(request):
             s = Student(user=s,branch=branch,semester=sem,batch=batch)
             s.rollnumber = roll_num
             s.save()
-            log = Logs(user=request.user,activity="data inserted",place="<Student> Table")
+            log = Logs(user=request.user,activity="record inserted",place="<Student> Table")
             log.save()
             return render(request,'regresult.html',{'flag':True,'student':s,'f_action':f_action})
 
@@ -148,6 +148,9 @@ def del_user(request,username):
     s= get_object_or_404(CustomUser,username=username)
     user_name= s.username
     s.delete()
+    log = Logs(user=request.user,activity="record deleted",place="<CustomUser> Table")
+    log.save()
+
     return render(request,'del_user.html',{'user_name':user_name})
 
 @login_required(login_url='/accounts/login')
@@ -196,6 +199,9 @@ def edit_user(request,username):
         stud.branch = branch
         stud.rollnumber = roll_num
         stud.save()
+        log = Logs(user=request.user,activity="record edited",place="<Student> Table")
+        log.save()
+
     return render(request,'StudReg.html',{'first_name':first_name,'last_name':last_name,'roll_num':roll_num,
     'password':password,'sem':sem,'sem_id':sem_id,'branch_code':branch_code,'branch':branch,'batch':str(batch),'user_id':userid,'f_action':f_action,
     'branches':branches,'semesters':semesters,'batches':batches})
@@ -318,6 +324,9 @@ def form_upload(request):
         if form.is_valid():
             print("valid")
             form.save()
+            log = Logs(user=request.user,activity="file uploaded",place="<MarkList> Table")
+            log.save()
+
     else:
         form = MarkListForm()
     return render(request, 'form_upload.html', {
@@ -348,6 +357,9 @@ def process_file(request,id,semid):
     matches=ptot(file_path)
     print(matches)
     writetodb(matches,semid) 
+    log = Logs(user=request.user,activity="Record Inserted",place="<Exam> Table")
+    log.save()
+
     return redirect('process')
 
 @login_required(login_url='/accounts/login')
