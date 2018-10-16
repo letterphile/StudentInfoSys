@@ -1,8 +1,8 @@
 from django import template
 
 register = template.Library()
-def user_auth(user):
-        return {'user':user}
+def user_auth(user,logs):
+        return {'user':user,'logs':logs}
 
 register.inclusion_tag('home1.html')(user_auth)
 

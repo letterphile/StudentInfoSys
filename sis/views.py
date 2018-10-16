@@ -16,7 +16,8 @@ def show_home(request):
         log.save()
         if request.user.usertype == 'STUDENT':
             return redirect('view_user',username=request.user.username)
-    return render(request,'home.html')
+    logs = Logs.objects.all()
+    return render(request,'home.html',{'logs':logs})
 @login_required(login_url='/accounts/login')
 def view_students(request):
     log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
@@ -379,6 +380,7 @@ def search(request):
     query=""
     if request.method == 'POST':
         query = request.POST.get('query')
+        print(query)
         results = CustomUser.objects.annotate(
             similarity=TrigramSimilarity('name',query),
         ).filter(similarity__gt=0.0).order_by('-similarity')
