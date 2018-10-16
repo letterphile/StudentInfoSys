@@ -1,7 +1,9 @@
 {%extends 'home1.html'%}
 
 {%block body%}
-<form action="." method = "post">
-    <input type = 
-</form>
+<ul>
+{%for result in results%}
+<li><a href="{{result.get_abolute_url}}">{{result.first_name}} {{result.last_name}} ({{result.username}})</a></li>
+{%endfor%}
+</ul>
 {%endblock%}
