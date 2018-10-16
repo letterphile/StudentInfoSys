@@ -111,3 +111,6 @@ class Logs(models.Model):
     activity = models.CharField(max_length=25)
     place = models.CharField(max_length=100)
     time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=('-time',)

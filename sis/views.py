@@ -179,6 +179,7 @@ def edit_user(request,username):
     if request.method == 'POST':
         first_name = request.POST.get('first')
         last_name = request.POST.get('last')
+        name = first_name+" "+last_name
         roll_num = request.POST.get('roll')
         password = request.POST.get('password')
         sem = request.POST.get('semester')
@@ -186,6 +187,7 @@ def edit_user(request,username):
         batch = request.POST.get('batch')
         s.first_name = first_name
         s.last_name= last_name
+        s.name = name
         if password != "":
             s.set_password(password)
         s.save()
