@@ -65,7 +65,7 @@
 {%block body%}
 <ul>
 {%for result in results%}
-<li><a href="{{result.get_abolute_url}}">{{result.first_name}} {{result.last_name}} ({{result.username}})</a></li>
+<li><a href="{{result.get_absolute_url}}">{{result.first_name}} {{result.last_name}} ({{result.username}})</a></li>
 {%endfor%}
 </ul>
 {%endblock%}
