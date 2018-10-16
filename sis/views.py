@@ -8,6 +8,7 @@ from pdftotext import *
 from pattern import *
 import os
 from django.conf import settings
+from django.contrib.postgres.search import TrigramSimilarity
 # Create your views here.
 def show_home(request):
     if  not request.user.is_anonymous:
@@ -56,7 +57,7 @@ def reg_student(request):
         username='PJR'
         username+='{}{}{}'.format(batch[2:],branch.upper()[:-1],str(roll_num).zfill(3))
 
-        s = CustomUser(first_name=first_name,last_name=last_name,username=username,usertype='STUDENT')
+        s = CustomUser(first_name=first_name,last_name=last_name,username=username,usertype='STUDENT',name=first_name+' '+last_name)
         try :
             s.save()
             s.set_password(password)
@@ -180,38 +181,98 @@ def view_result(request,username):
     flag = False
     req_user = request.user
     if req_user.usertype == 'ADMIN':
-        flag = True
+        flag = True #Used to render the page according to the type of the user
     stud = Student.objects.get(user=cuser)
     results = Exam.objects.filter(student=stud)
-    s1=None
-    s2=None
-    s3=None
-    s4=None
-    s5=None
-    s6=None
-    s7=None
-    s8=None
+    #variables to store results of each semester
+    s1_results=[]
+    s2_results=[]
+    s3_results=[]
+    s4_results=[]
+    s5_results=[]
+    s6_results=[]
+    s7_results=[]
+    s8_results=[]
 
-    if results.filter(semester=Semester.objects.get(semester_code='s3')).count() is not 0:
-        s3 = results.filter(semester=Semester.objects.get(semester_code='s3'))
-    if results.filter(semester=Semester.objects.get(semester_code='s1')).count() is not 0:
-        s1 = results.filter(semester=Semester.objects.get(semester_code='s1'))
-    if results.filter(semester=Semester.objects.get(semester_code='s2')).count() is not 0:
-        s2 = results.filter(semester=Semester.objects.get(semester_code='s2'))
-    if results.filter(semester=Semester.objects.get(semester_code='s4')).count() is not 0:
-        s4 = results.filter(semester=Semester.objects.get(semester_code='s4'))
-    if results.filter(semester=Semester.objects.get(semester_code='s5')).count() is not 0:
-        s5 = results.filter(semester=Semester.objects.get(semester_code='s5'))
+    #variables to store each semester
+    s1 = Semester.objects.get(semester_code='s1')
+    s2 = Semester.objects.get(semester_code='s2')
+    s3 = Semester.objects.get(semester_code ='s3')
+    s4 = Semester.objects.get(semester_code='s4')
+    s5 = Semester.objects.get(semester_code='s5')
+    s6 = Semester.objects.get(semester_code='s6')
+    s7 = Semester.objects.get(semster_code = 's7')
+    s8 = Semester.objects.get(semster_code = 's8')
 
-    if results.filter(semester=Semester.objects.get(semester_code='s6')).count() is not 0:
-        s6 = results.filter(semester=Semester.objects.get(semester_code='s6'))
+    #getting courses of each semester
+    s1_courses = Course.objects.filter(semester = s1)
+    s2_courses = Course.objects.filter(semester = s2)
+    s3_courses = Course.objects.filter(semester = s3)
+    s4_courses = Course.objects.filter(semester = s4)
+    s5_courses = Course.objects.filter(semester = s5)
+    s6_courses = Course.objects.filter(semester = s6)
+    s7_courses = Course.objects.filter(semester = s7)
+    s8_courses = Course.objects.filter(semester = s8)
 
-    if results.filter(semester=Semester.objects.get(semester_code='s7')).count() is not 0:
-        s7 = results.filter(semester=Semester.objects.get(semester_code='s7'))
-    if results.filter(semester=Semester.objects.get(semester_code='s8')).count() is not 0:
-        s8 = results.filter(semester=Semester.objects.get(semester_code='s8'))
+    #Retrieving all results by courses
+    for course in s1_courses:
+        try:
+            #appends each result of 's1 courses'  of 'student' to 's1 results' 
+            s1_results.append(results.get(course=course))
+        except ObjectDoesNotExist:
+            continue
+    for course in s2_courses:
+        try:
+            #appends each result of 's1 courses'  of 'student' to 's1 results' 
+            s2_results.append(results.get(course=course))
+        except ObjectDoesNotExist:
+            continue
 
-    return render (request,'view_result.html',{'s1':s1,'s2':s2,'s3':s3,'s4':s4,'s5':s5,'s6':s6,'s7':s7,'s8':s8,'flag':flag})
+    for course in s3_courses:
+        try:
+            #appends each result of 's1 courses'  of 'student' to 's1 results' 
+            s3_results.append(results.get(course=course))
+        except ObjectDoesNotExist:
+            continue
+
+    for course in s4_courses:
+        try:
+            #appends each result of 's1 courses'  of 'student' to 's1 results' 
+            s4_results.append(results.get(course=course))
+        except ObjectDoesNotExist:
+            continue
+
+    for course in s5_courses:
+        try:
+            #appends each result of 's1 courses'  of 'student' to 's1 results' 
+            s5_results.append(results.get(course=course))
+        except ObjectDoesNotExist:
+            continue
+
+
+    for course in s6_courses:
+        try:
+            #appends each result of 's1 courses'  of 'student' to 's1 results' 
+            s6_results.append(results.get(course=course))
+        except ObjectDoesNotExist:
+            continue
+
+    for course in s7_courses:
+        try:
+            #appends each result of 's1 courses'  of 'student' to 's1 results' 
+            s7_results.append(results.get(course=course))
+        except ObjectDoesNotExist:
+            continue
+
+    for course in s8_courses:
+        try:
+            #appends each result of 's1 courses'  of 'student' to 's1 results' 
+            s8_results.append(results.get(course=course))
+        except ObjectDoesNotExist:
+            continue
+
+
+    return render (request,'view_result.html',{'s1':s1_results,'s2':s2_results,'s3':s3_results,'s4':s4_results,'s5':s5_results,'s6':s6_results,'s7':s7_results,'s8':s8_results,'flag':flag})
 
 @login_required(login_url='/accounts/login')
 def form_upload(request):
@@ -253,3 +314,15 @@ def process_file(request,id,semid):
 @login_required(login_url='/accounts/login')
 def not_auth(request):
     return render(request,'no_auth.html')
+
+@login_required(login_url='/accounts/login')
+def search(request):
+    if request.user.usertype != 'ADMIN':
+       return render(request,'no_auth.html')
+    query=""
+    if request.method == 'POST':
+        query = request.POST.get('query')
+        results = CustomUser.objects.annotate(
+            similarity=TrigramSimilarity('name',query),
+        ).filter(similarity__gt=0.0).order_by('-similarity')
+    return render(request,'search.html',{'results':results,'query':query})

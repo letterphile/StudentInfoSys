@@ -3,7 +3,6 @@ from sis.models import *
 from django.core.exceptions import ObjectDoesNotExist
 def writetodb(match,semid):
     a = []
-    b = []
     matches = match
     for i in matches:
 	    a.append([i.group(1),i.group(2),i.group(3)])
@@ -13,7 +12,7 @@ def writetodb(match,semid):
 	    j[2] = j[2][1:]
 	    j[2].append(j[1])
 	    del j[1]
-    sem = Semester.objects.get(id=int(semid))
+    #sem = Semester.objects.get(id=int(semid))
     new_pattern = r'(\w+)\((\w+[+]?)\)'
     new_pattern = re.compile(new_pattern)
     for i in a:
@@ -29,16 +28,13 @@ def writetodb(match,semid):
                 try:
                     c = Course.objects.get(course_code=k.group(1))
                 except ObjectDoesNotExist:
-                    c = Course.objects.create(course_code=k.group(1),course_name=k.group(1),semester=sem)
-            
+                    continue
                 try:
-                    e = Exam.objects.get(student=stud,semester=sem,course=c)
+                    e = Exam.objects.get(student=stud,course=c)
                     if (k.group(2) != 'Absent'):
                         e.grade = k.group(2)
                     e.save()
                     print("already exist so re writing...")
                 except ObjectDoesNotExist:
-                    e = Exam(student=stud,semester=sem,course=c,grade=k.group(2))
-                    e.save()
-                    print("adding new exam register..")
+                    continue
             #print("{} : {} ".format(k.group(1),k.group(2)))​

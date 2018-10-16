@@ -17,6 +17,7 @@ class CustomUser(AbstractUser):
     )
     usertype = models.CharField(max_length=50,choices=choices,default='STUDENT')
     user_slug = models.SlugField(max_length=25,null=True)
+    name = models.CharField(max_length=100,blank=True,null=True)
     def get_absolute_url(self):
         return reverse('view_user', kwargs={'username': self.username})
 
@@ -82,7 +83,6 @@ class Student(models.Model):
 
 class Exam(models.Model):
     grades = (('O','O'),('A+','A+'),('A','A'),('B+','B+'),('C','C'),('D','D'),('P','P'),('Absent','Absent'))
-    semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
     grade  = models.CharField(max_length=10,choices=grades)

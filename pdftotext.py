@@ -1,6 +1,7 @@
 import PyPDF2 
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+import textract
 import re
 def ptot(file):
     filename =  file
@@ -22,11 +23,12 @@ def ptot(file):
         text = text
     #If the above returns as False, we run the OCR library textract to #convert scanned/image based PDF files into text
     else:
-        text = textract.process(fileurl, method='tesseract', language='eng')
+        text = textract.process(file, method='tesseract', language='eng')
 
-    pattern = re.compile(r'(\w{3}\d{2}\w{2}\d{3})(\w+\(\w+[+]?\))((,\s\w+\(\w+[+]?\))*)')
-    matches = pattern.finditer(text)
-    return matches
+    #pattern = re.compile(r'(\w{3}\d{2}\w{2}\d{3})(\w+\(\w+[+]?\))((,\s\w+\(\w+[+]?\))*)')
+    #matches = pattern.finditer(text)
+    #return matches
+    return text
 
     # Now we have a text variable which contains all the text derived #from our PDF file. Type print(text) to see what it contains. It #likely contains a lot of spaces, possibly junk such as '\n' etc.
     # Now, we will clean our text variable, and return it as a list of keywords.
