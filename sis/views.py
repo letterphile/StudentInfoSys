@@ -12,7 +12,7 @@ from django.contrib.postgres.search import TrigramSimilarity
 # Create your views here.
 def show_home(request):
     if  not request.user.is_anonymous:
-        log = Logs(user=request.user,activity="visited",place=request.build_absolute_url())
+        log = Logs(user=request.user,activity="visited",place=request.build_absolute_uri())
         log.save()
         if request.user.usertype == 'STUDENT':
             return redirect('view_user',username=request.user.username)
