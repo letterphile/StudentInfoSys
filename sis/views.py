@@ -386,5 +386,7 @@ def search(request):
         results = CustomUser.objects.annotate(
             similarity=TrigramSimilarity('name',query),
         ).filter(similarity__gt=0.0).order_by('-similarity')
+        if query == "":
+            results = CustomUser.objects.all()
         print(results)
     return render(request,'search2.html',{'results':results,'query':query})
