@@ -1,0 +1,20 @@
+{%extends "view_student.html"%}
+{%block body%}
+<form action="." method="post" name = "potform">
+    {%csrf_token%}
+    <textarea name="message" required></textarea>
+    <input type="submit" value ="dip">
+</form>
+<h1>Pots...</h1>
+{%for pot in pots%}
+{%if pot.riser%}
+<b>{{pot.dipper}} raised {{pot.riser}}</b><br>
+<i>
+{{pot.riser}} : {{pot.rise_message}}
+</i>
+{%endif%}
+<br><br>
+{{pot.dipper}}: {{pot.dip_message}}
+<br>{{pot.created}} <a href="{%url 'rise' pot.id%}">RISE</a><br>
+{%endfor%}
+{%endblock%}

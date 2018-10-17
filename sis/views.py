@@ -391,3 +391,7 @@ def search(request):
         results = CustomUser.objects.all()
     print(results)
     return render(request,'search2.html',{'results':results,'query':query})
+
+
+
+
