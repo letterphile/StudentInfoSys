@@ -68,7 +68,7 @@
 <h1> Activity Feed</h1>
 <ul>
     {%for log in logs %}
-    <li>{{log.user}} : {{log.activity}} in {{log.place}} at {{log.time}}</li>
+    <li>{{log.user}} : {{log.activity}} in {{log.place}} at {%local_time log.time%}</li>
     {%endfor%}
 </ul>
 {%endblock%}
