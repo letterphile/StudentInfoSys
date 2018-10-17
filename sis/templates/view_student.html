@@ -1,4 +1,83 @@
 {%extends "home1.html"%}
+{%block navigation%}
+
+{%if not flag%}
+<a class="navbar-brand logo" href="/">SIS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="{%url 'logout' %}" method="get">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+        </div>
+{%else%}
+<a class="navbar-brand logo" href="/">SIS</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">Home
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Student
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/student_registration">Student Registration</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/student_view">View Students</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Faculties
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/faculty_registration">Faculty Registration</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/faculty_view">View Faculty</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Subjects
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/subject_registration">Subject Registration</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/view_subjects">View Subjects</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'form_upload'%}">Upload</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{%url 'process'%}">Update Grades</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="{%url 'logout' %}" method="get">
+                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Logout</button>
+            </form>
+        </div>
+{%endif%}
+{%endblock%}
 {%block body%}
 <p> First Name :{{user.first_name}}<br>
     Last Name : {{user.last_name}}<br>

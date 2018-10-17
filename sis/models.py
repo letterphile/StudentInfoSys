@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
+from django.contrib.postgres.fields import ArrayField
 
 class Document(models.Model):
     description = models.CharField(max_length=255, blank=True)
@@ -15,8 +16,9 @@ class CustomUser(AbstractUser):
         ('ADMIN','Admin'),
         ('HOD','HOD'),
     )
-    usertype = models.CharField(max_length=50,choices=choices)
+    usertype = models.CharField(max_length=50,choices=choices,default='STUDENT')
     user_slug = models.SlugField(max_length=25,null=True)
+    name = models.CharField(max_length=100,blank=True,null=True)
     def get_absolute_url(self):
         return reverse('view_user', kwargs={'username': self.username})
 
@@ -82,7 +84,6 @@ class Student(models.Model):
 
 class Exam(models.Model):
     grades = (('O','O'),('A+','A+'),('A','A'),('B+','B+'),('C','C'),('D','D'),('P','P'),('Absent','Absent'))
-    semester = models.ForeignKey(Semester,on_delete=models.CASCADE)
     course = models.ForeignKey(Course,on_delete=models.CASCADE)
     student = models.ForeignKey(Student,on_delete=models.CASCADE)
     grade  = models.CharField(max_length=10,choices=grades)
@@ -104,3 +105,13 @@ class MarkList(models.Model):
     description = models.CharField(max_length=255, blank=True)
     document = models.FileField(upload_to='documents/')
     uploaded_at = models.DateTimeField(auto_now_add=True)
+
+
+class Logs(models.Model):
+    user = models.ForeignKey(CustomUser,on_delete=models.CASCADE)
+    activity = models.CharField(max_length=25)
+    place = models.CharField(max_length=100)
+    time = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering=('-time',)

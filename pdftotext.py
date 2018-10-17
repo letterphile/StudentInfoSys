@@ -16,9 +16,10 @@ def ptot(file):
     if text != "":
         text = text
     else:
-        text = textract.process(fileurl, method='tesseract', language='eng')
+        text = textract.process(file, method='tesseract', language='eng')
 
-    pattern = re.compile(r'(\w{3}\d{2}\w{2}\d{3})(\w+\(\w+[+]?\))((,\s\w+\(\w+[+]?\))*)')
-    matches = pattern.finditer(text)
-    return matches
+    #pattern = re.compile(r'(\w{3}\d{2}\w{2}\d{3})(\w+\(\w+[+]?\))((,\s\w+\(\w+[+]?\))*)')
+    #matches = pattern.finditer(text)
+    #return matches
+    return text
 

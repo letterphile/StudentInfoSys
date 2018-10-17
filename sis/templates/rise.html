@@ -1,0 +1,9 @@
+{%extends 'search.html'%}
+{%block body%}
+{{pot.sender}} : {{pot.dip_message}}<br><br>
+<form action="{%url 'pool_process' pot.id %}" method="post" name = "potform">
+    {%csrf_token%}
+    <textarea name="message" required></textarea>
+    <input type="submit" value ="rise">
+</form>
+{%endblock%}

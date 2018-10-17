@@ -34,9 +34,11 @@ urlpatterns = [
     path('upload/',form_upload,name='form_upload'),
     path('process/',process,name='process'),
     path('process/<int:id>/<int:semid>',process_file,name='process_file'),
+    path('search/',search,name='search'),
     path('<slug:username>/',view_user,name='view_user'),
     path('delete/<slug:username>',del_user,name='delete_user'),
     path('edit/<slug:username>',edit_user,name='edit_user'),
     path('<slug:username>/result/',view_result,name='view_result'), 
+    path('not_authorized/',not_auth,name='no_auth'),
     ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

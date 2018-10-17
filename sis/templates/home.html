@@ -4,7 +4,7 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-  {% user_auth user%}
+  {% user_auth user logs%}
 {% else %}
 {%user_not_auth user%}
 {% endif %}
