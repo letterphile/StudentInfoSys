@@ -10,7 +10,7 @@ configobj==5.0.6
 cupshelpers==1.0
 defer==1.0.6
 Django==2.1.1
-httplib2==0.9.2
+httplib2==0.19.0
 idna==2.6
 LibAppArmor==2.12
 louis==3.5.0
