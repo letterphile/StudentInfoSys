@@ -15,7 +15,7 @@ idna==2.6
 LibAppArmor==2.12
 louis==3.5.0
 macaroonbakery==1.1.3
-Mako==1.0.7
+Mako==1.2.2
 MarkupSafe==1.0
 nyx==2.0.4
 onboard==1.4.1
